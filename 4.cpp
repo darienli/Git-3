@@ -197,7 +197,10 @@ int main()
         insert(tr, x);
     }
     cout << "You printed: "; inorder(tr);  cout << endl;
+    //1
     del_nch(tr);
     inorder(tr);  cout << endl;
-    return 0;
+    //2
+    //int a, b; cout << "Print А and B "; cin >> a >> b; cout << endl;
+    //path(tr, a, b);
 }
