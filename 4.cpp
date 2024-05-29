@@ -149,6 +149,34 @@ void Delete(tree*& tr, tree* v) {//удаление узла
         delete succ;
     }
 }
+void pathToRoot(tree* tr, tree* w)
+{
+    tree* p = w;
+    while (tr != p)
+    {
+        cout << p->inf << " "; p = p->parent;
+    }
+}
+void pathToNode(tree* tr, tree* p)
+{
+    cout << tr->inf << " ";
+    if (p->inf == tr->inf)
+        return;
+    else if (p->inf < tr->inf)
+        pathToNode(tr->left, p);
+    else
+        pathToNode(tr->right, p);
+}
+void path(tree* tr, int a, int b)
+{
+    tree* p = tr;
+    if (a <= tr->inf && b >= tr->inf)
+    {
+        pathToRoot(tr, find(tr, a)); pathToNode(tr, find(tr, b));
+    }
+    else if (a < tr->inf && b < tr->inf) path(tr->left, a, b);
+    else path(tr->right, a, b);
+}
 void del_nch(tree*& tr) {
     if (tr) {
         del_nch(tr->left);
