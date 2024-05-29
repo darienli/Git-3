@@ -22,6 +22,13 @@ void inorder(tree* tr) { // симметричный обход (Л-К-П)
         inorder(tr->right); //правое
     }
 }
+void preorder(tree* tr) { // прямой обход (К-Л-П)
+    if (tr) {
+        cout << tr->inf; //корень
+        preorder(tr->left); //левое
+        preorder(tr->right); //правое
+    }
+}
 void insert(tree*& tr, int x) {//вставка
     tree* n = node(x);
     if (!tr) tr = n; //если дерево пустое - корень
@@ -65,6 +72,21 @@ tree* Next(tree* tr, int x) {//поиск следующего
         return Min(n->right);//min по правой ветке
     tree* y = n->parent; //родитель
     while (y && n == y->right) {//пока не дошли до корня или узел - правый ребенок
+        n = y;//идем вверх по дереву
+        y = y->parent;
+    }
+    return y;//возвращаем родителя
+}
+tree* Max(tree* tr) {//поиск max
+    if (!tr->right) return tr;//нет правого ребенка
+    else return Max(tr->right);//идем по правой ветке до конца
+}
+tree* Prev(tree* tr, int x) {//поиск предыдущего
+    tree* n = find(tr, x);
+    if (n->left)//если есть левый ребенок
+        return Max(n->left);//max по левой ветке
+    tree* y = n->parent;//родитель
+    while (y && n == y->left) {//пока не дошли до корня или узел - левый ребенок
         n = y;//идем вверх по дереву
         y = y->parent;
     }
